@@ -44,7 +44,7 @@ const ProductCard = ({id, name, price, image, brand, rating}: ProductCardType) =
                 <Link 
                     href={`/catalog/product/${id}`}
                 >
-                    <h3 className="text-lg font-semibold hover:text-zinc-600">
+                    <h3 className="text-lg font-semibold hover:text-zinc-600 block w-48 truncate">
                         {name}
                     </h3>
                     <span className="text-2xl text-black font-bold">
@@ -53,11 +53,11 @@ const ProductCard = ({id, name, price, image, brand, rating}: ProductCardType) =
                 </Link>
                 <div className="flex justify-between gap-1 w-full">
                     
-                    <Button className="w-2/3 cursor-pointer" size="sm">
+                    <Button className="w-2/3 cursor-pointer" size="lg">
                         Comprar
                     </Button>
                     <Button
-                        size="sm"
+                        size="lg"
                         variant="outline"
                     >
                         <ShoppingCart />

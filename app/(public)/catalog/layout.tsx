@@ -1,3 +1,4 @@
+import Header from "@/components/header/Header";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 const geistSans = Geist({
@@ -25,9 +26,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="w-full bg-amber-400 h-20">
-            Header
-        </header>
+        <Header />
         {children}
       </body>
     </html>
