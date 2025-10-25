@@ -1,7 +1,7 @@
 
 const CatalogBanner = () => {
     return (
-        <div className="w-full bg-amber-400 h-[600px]">
+        <div className="w-full bg-amber-200 h-[600px]">
 
         </div>
     )

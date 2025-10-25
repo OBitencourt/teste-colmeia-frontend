@@ -2,43 +2,62 @@ import { ShoppingCart } from "lucide-react"
 import Image from "next/image"
 import { Button } from "../ui/button"
 import { Badge } from "../ui/badge"
+import Link from "next/link"
 
-const ProductCard = () => {
+interface ProductCardType {
+    id: string
+    name: string
+    price: number
+    image: string
+    brand: string
+    rating: number
+}
+
+const ProductCard = ({id, name, price, image, brand, rating}: ProductCardType) => {
     return (
-        <div className="flex justify-around flex-wrap wrap-normal bg-amber-50 rounded-2xl border-amber-200 border">
-            <div className="flex flex-col gap-3 p-3">
-                <div className="bg-zinc-50 w-full rounded-2xl">
+        
+        <div className="flex  flex-wrap wrap-normal bg-amber-50 rounded-sm border-amber-100 border hover:scale-105 transition p-6">
+            <div className="flex flex-col gap-3 ">
+                
+
+                <div className="bg-zinc-50 w-full h-50 rounded-2xl flex justify-center items-center">
                     <Image 
-                        src="/product-2.png"
-                        width={250}
+                        src={image}
+                        width={200}
                         height={200}
                         alt="product-1"
                         style={{
-                            height: 'auto'
+                            height: 'auto',
+                            maxWidth: '150px'
                         }}
                     />
                 </div>
 
                 <div className="flex justify-between">
                     <Badge>
-                        Primor
+                        {brand}
                     </Badge>
                     <div>
-                        4.7/5
+                        {rating}/5
                     </div>
                 </div>
-                <h3 className="text-lg font-semibold">
-                    Cremes da Primor
-                </h3>
-                <span className="text-2xl text-black font-bold">
-                    $3,600
-                </span>
-                <div className="flex justify-between gap-1">
-                    <Button className="w-2/3" size="lg">
+                <Link 
+                    href={`/catalog/product/${id}`}
+                >
+                    <h3 className="text-lg font-semibold hover:text-zinc-600">
+                        {name}
+                    </h3>
+                    <span className="text-2xl text-black font-bold">
+                        ${price}
+                    </span>
+                </Link>
+                <div className="flex justify-between gap-1 w-full">
+                    
+                    <Button className="w-2/3 cursor-pointer" size="sm">
                         Comprar
                     </Button>
                     <Button
-                        size="lg"
+                        size="sm"
                         variant="outline"
                     >
                         <ShoppingCart />

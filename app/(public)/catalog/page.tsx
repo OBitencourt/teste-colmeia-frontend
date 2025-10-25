@@ -1,6 +1,7 @@
 import CatalogBanner from "@/components/catalogBanner/CatalogBanner";
 import ProductCard from "@/components/productCard/ProductCard";
 import { Separator } from "@/components/ui/separator";
+import { products } from "@/mocks/products";
 
 export default function Catalog () {
     
@@ -21,17 +22,19 @@ export default function Catalog () {
 
                 <div className="flex flex-wrap wrap-normal w-full gap-6">
 
-
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
+                    {
+                        products?.map(product => (
+                            <ProductCard 
+                                key={product.id}
+                                id={product.id}
+                                name={product.name}
+                                price={product.price}
+                                image={product.image}
+                                rating={product.rating}
+                                brand={product.brand}
+                            />
+                        ))
+                    }
 
                     
                 </div>
