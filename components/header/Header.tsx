@@ -2,6 +2,8 @@ import Image from "next/image"
 import { Avatar, AvatarFallback } from "../ui/avatar"
 import { ShoppingCart } from "lucide-react"
 import { Input } from "../ui/input"
+import { Sheet, SheetTrigger } from "../ui/sheet"
+import Cart from "../cart/Cart"
 
 
 const Header = () => {
@@ -16,7 +18,7 @@ const Header = () => {
             />
             <div>
                 <Input
-                    className="bg-zinc-200 w-[450px] border border-zinc-400 p-5"
+                    className="bg-zinc-100 w-[450px] border border-zinc-400 p-5"
                     placeholder="Pesquise algo para comprar na colméia"
                 >
                 
@@ -30,9 +32,15 @@ const Header = () => {
                     </AvatarFallback>
                 </Avatar>
 
-                <div className="p-4 bg-zinc-100 rounded-xl border border-transparent hover:border-zinc-300 hover:bg-zinc-50 transition">
-                    <ShoppingCart />
-                </div>
+                <Sheet>
+                    <SheetTrigger>
+
+                        <div className="p-4 bg-zinc-100 rounded-xl border border-transparent hover:border-zinc-300 hover:bg-zinc-50 transition">
+                            <ShoppingCart />
+                        </div>
+                    </SheetTrigger>
+                    <Cart />
+                </Sheet>
             </div>
         </header>
     )

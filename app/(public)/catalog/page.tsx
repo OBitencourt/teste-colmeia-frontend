@@ -1,3 +1,5 @@
+"use client"
+
 import CatalogBanner from "@/components/catalogBanner/CatalogBanner";
 import ProductCard from "@/components/productCard/ProductCard";
 import { Separator } from "@/components/ui/separator";

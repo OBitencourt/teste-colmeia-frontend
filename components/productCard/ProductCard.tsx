@@ -3,6 +3,9 @@ import Image from "next/image"
 import { Button } from "../ui/button"
 import { Badge } from "../ui/badge"
 import Link from "next/link"
+import { useAppDispatch } from "@/store"
+import { addToCart } from "@/store/slices/cart"
+import { products } from "@/mocks/products";
 
 interface ProductCardType {
     id: string
@@ -14,6 +17,16 @@ interface ProductCardType {
 }
 
 const ProductCard = ({id, name, price, image, brand, rating}: ProductCardType) => {
+
+    const productFiltered = products.filter(product => product.id === id)
+    const product = productFiltered[0]
+
+    const dispatch = useAppDispatch()
+    
+    const handleAddToCart = () => {
+        dispatch(addToCart(product))
+    }
+
     return (
         
         <div className="flex  flex-wrap wrap-normal bg-amber-50 rounded-sm border-amber-100 border hover:scale-105 transition p-6">
@@ -59,6 +72,7 @@ const ProductCard = ({id, name, price, image, brand, rating}: ProductCardType) =
                     <Button
                         size="lg"
                         variant="outline"
+                        onClick={handleAddToCart}
                     >
                         <ShoppingCart />
                     </Button>
