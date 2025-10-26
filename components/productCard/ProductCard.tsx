@@ -67,7 +67,7 @@ const ProductCard = ({id, name, price, image, brand, rating}: ProductCardType) =
                 <div className="flex justify-between gap-1 w-full">
                     
                     <Button className="w-2/3 cursor-pointer" size="lg">
-                        Comprar
+                        Comprar Agora
                     </Button>
                     <Button
                         size="lg"

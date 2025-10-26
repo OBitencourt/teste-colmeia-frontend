@@ -5,6 +5,7 @@ import { SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } 
 import CartItem from "./CartItem"
 import { Button } from "../ui/button"
 import { useAppSelector } from "@/store"
+import Link from "next/link"
 
 // Faz useSelector dos itens e mostra
 
@@ -51,6 +52,17 @@ const Cart = () => {
                     >
                         Concluir Compra
                     </Button>
+
+                    <Link
+                        className="w-full"
+                        href="/cart"
+                    >
+                        <Button
+                            className="cursor-pointer w-full"
+                        >
+                            Ir para seu carrinho
+                        </Button>
+                    </Link>
                 </SheetFooter>
             </SheetContent>
         </>

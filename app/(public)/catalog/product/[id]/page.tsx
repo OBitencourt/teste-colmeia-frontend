@@ -6,14 +6,21 @@ import { useParams } from "next/navigation";
 import { products } from "@/mocks/products";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
+import { useAppDispatch } from "@/store";
+import { addToCart } from "@/store/slices/cart";
 
 export default function ProductPage () {
 
+    const dispatch = useAppDispatch()
     const params = useParams<{id: string}>()
 
     const { id } = params
     const productFiltered = products.filter(product => product.id == id)
     const product = productFiltered[0]
+
+    const handleAddToCart = () => {
+        dispatch(addToCart(product))
+    }
 
     return (
         <div
@@ -78,7 +85,7 @@ export default function ProductPage () {
                                 size="lg"
                                 className="text-lg p-8 flex-8"
                             >
-                                Comprar Item
+                                Comprar Agora
                             </Button>
                             <Button
                                 size="lg"
@@ -92,6 +99,7 @@ export default function ProductPage () {
                             size="lg"
                             variant="outline"
                             className="flex gap-4 text-lg p-8"
+                            onClick={handleAddToCart}
                         >
                             Adicionar ao carrinho
                             <ShoppingCart />
