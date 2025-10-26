@@ -41,6 +41,7 @@ const Header = () => {
                     <SheetTrigger>
 
                         <div className="p-3 rounded-xl hover:bg-amber-300 transition relative">
+                            
                             <div className="bg-black px-2 py-0.5 rounded-full text-white text-sm absolute top-0 -right-2">
                                 {items.length}
                             </div>

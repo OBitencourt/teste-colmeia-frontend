@@ -47,11 +47,16 @@ const Cart = () => {
                     <h2 className="text-lg text-black font-semibold">
                         Preço Total: ${totalPrice}
                     </h2>
-                    <Button
-                        className="bg-amber-400 hover:bg-amber-500 cursor-pointer"
+                    <Link
+                        href="/checkout"
+                        className="w-full"
                     >
-                        Concluir Compra
-                    </Button>
+                        <Button
+                            className="bg-amber-400 w-full hover:bg-amber-500 cursor-pointer"
+                        >
+                            Concluir Compra
+                        </Button>
+                    </Link>
 
                     <Link
                         className="w-full"

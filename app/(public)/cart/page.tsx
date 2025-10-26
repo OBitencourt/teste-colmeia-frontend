@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { useAppSelector } from "@/store"
 import { ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 
 export default function CartPage () {
 
     const items = useAppSelector(store => store.cart.items)
-    console.log(items)
 
     const totalPrice = items.reduce((acc, item) => {
         return acc + item.product.price * item.quantity
@@ -48,13 +48,18 @@ export default function CartPage () {
                         <span className="text-black text-2xl font-semibold">${totalPrice}</span>
                     </div>
                     
-                    <Button
-                        size="lg"
-                        className="rounded-xl text-md py-6 mt-auto" 
+                    <Link
+                        className="w-full mt-auto"
+                        href="/checkout"
                     >
-                        Fazer Checkout
-                        <ArrowRight />
-                    </Button>
+                        <Button
+                            size="lg"
+                            className="w-full rounded-xl text-md py-6" 
+                        >
+                            Fazer Checkout
+                            <ArrowRight />
+                        </Button>
+                    </Link>
                 </div>
 
             </div>
