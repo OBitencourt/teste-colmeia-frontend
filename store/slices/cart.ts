@@ -20,8 +20,12 @@ interface CartState {
   items: CartItem[]
 }
 
+const savedCart = typeof window !== "undefined" 
+  ? JSON.parse(localStorage.getItem("cart") || "[]")
+  : []
+
 const initialState: CartState = {
-  items: []
+  items: savedCart
 }
 
 export const cartSlice = createSlice({
@@ -33,7 +37,6 @@ export const cartSlice = createSlice({
 
     addToCart: (state, action :PayloadAction<Product>) => {
 
-      
       const existingItem = state.items.find(
         (item) => item.product.id === action.payload.id
       )
@@ -43,6 +46,7 @@ export const cartSlice = createSlice({
       } else {
         state.items.push({ product: action.payload, quantity: 1 })
       }
+      localStorage.setItem("cart", JSON.stringify(state.items))
     },
     
     // Remover do carrinho
@@ -51,6 +55,7 @@ export const cartSlice = createSlice({
       state.items = state.items.filter(
         item => item.product.id !== action.payload
       )
+      localStorage.setItem("cart", JSON.stringify(state.items))
     },
 
     // Aumentar ou diminuir quantidade do produto no carrinho
@@ -67,12 +72,14 @@ export const cartSlice = createSlice({
       } else if (item && action.payload.signal === '+') {
         item.quantity += 1
       }
+      localStorage.setItem("cart", JSON.stringify(state.items))
     },
 
     // Limpar carrinho
 
     clearCart: (state) => {
       state.items = []
+      localStorage.removeItem("cart")
     },
   },
   

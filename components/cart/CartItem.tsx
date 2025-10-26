@@ -53,7 +53,7 @@ const CartItem = ({ item }: CartItemProps) => {
     }
 
     return (
-        <div className="flex gap-4 border border-zinc-200 rounded px-2 py-4">
+        <div className="flex gap-4 border border-zinc-200 rounded px-2 py-4 mt-2">
             <div className="bg-zinc-100 rounded-sm flex justify-center items-center">
                 <Image 
                     src={image}
