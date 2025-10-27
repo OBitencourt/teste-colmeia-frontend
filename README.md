@@ -1,61 +1,57 @@
-Projeto Frontend — Fluxo de Checkout (Mockado)
+## **Projeto Frontend — Fluxo de Checkout Mockado**
 
-Este projeto é uma aplicação web mockada que implementa o fluxo completo de checkout, seguindo o desafio da Colmeia.io. Ele é desenvolvido em Next.js 13, TypeScript, Tailwind CSS e ShadCN UI, com estado global gerenciado via Redux Toolkit.
+Este projeto é uma aplicação web totalmente mockada que implementa o fluxo completo de checkout, conforme o desafio da Colmeia.io. Ele é desenvolvido em Next.js 13 com TypeScript, Tailwind CSS e ShadCN UI, utilizando Redux Toolkit para estado global do carrinho.
 
-🔹 Tecnologias Utilizadas
+**Tecnologias Utilizadas**
 
-Next.js 13 (App Router)
+- Next.js 13 (App Router)
 
-React + TypeScript
+- React + TypeScript
 
-Tailwind CSS
+- Tailwind CSS
 
-ShadCN UI
+- ShadCN UI
 
-Redux Toolkit (estado global do carrinho)
+- Redux Toolkit (gerenciamento global do carrinho)
 
-LocalStorage (sessão de usuário mockada)
+- LocalStorage (simulação de sessão de usuário)
 
-Componentização: CartItem, CheckoutForm, Header, Popover de usuário
+- Componentização: Cart, CartItem, CheckoutForm, Header, Popover de usuário, ProductCard,
 
-🔹 Estrutura do Projeto
+**Estrutura do Projeto**
+
 app/          → Rotas e páginas (catalog, cart, checkout, login)
-components/   → Componentes reutilizáveis (Header, Footer, CartItem, CheckoutForm)
+components/   → Componentes reutilizáveis (Header, Footer, CartItem, CheckoutForm, Cart)
 store/        → Redux Toolkit para gerenciamento do carrinho
-mocks/        → Dados mockados de produtos e usuários
+mocks/products.ts        → Dados mockados de produtos
 public/       → Imagens e arquivos estáticos
-styles/       → Tailwind CSS
 
-🔹 Fluxo do Usuário
+**Fluxo do Usuário**
 flowchart TD
     A[Login / Cadastro] --> B[Catálogo de Produtos]
     B --> C[Carrinho]
     C --> D[Checkout]
     D --> E[Resultado do Pagamento]
 
-    %% Login / Cadastro
     A -->|Usuário logado persistido em localStorage| B
     A -->|Bloqueio de checkout se não logado| C
 
-    %% Catálogo
     B -->|Adicionar ao carrinho| C
     B -->|Comprar agora (direto)| D
 
-    %% Carrinho
     C -->|Alterar quantidade / remover| C
     C -->|Concluir compra| D
 
-    %% Checkout
     D -->|Passo 1: Dados do comprador| D
     D -->|Passo 2: Seleção de pagamento (Pix / Cartão / Boleto)| D
     D -->|Passo 3: Revisão e confirmação| D
     D -->|Passo 4: Simulação de pagamento| E
 
-    %% Resultado do Pagamento
     E -->|Pago / Falhou / Expirado| D
 
-🔹 Páginas e Funcionalidades
-1️⃣ Login (/login)
+**Páginas e Funcionalidades**
+
+## Login (/login)
 
 Tela única para login com usuário mock:
 
@@ -64,91 +60,87 @@ const users = [
 ];
 
 
-Persistência da sessão no localStorage.
+- Persistência da sessão no localStorage
 
-Redirecionamento automático para /catalog ou /checkout.
+- Redireciona automaticamente para /catalog ou /checkout
 
-Bloqueio de checkout se usuário não estiver logado.
+- Bloqueio de checkout se usuário não estiver logado
 
-2️⃣ Catálogo (/catalog)
+## Catálogo (/catalog)
 
-Lista de produtos mockados: ID, nome, imagem, marca, preço, descrição, rating, vendidos.
+- Lista de produtos mockados: ID, nome, imagem, marca, preço, descrição, rating, vendidos
 
-Funcionalidades:
+- Funcionalidades:
 
-Adicionar ao carrinho → atualiza Redux
+- Adicionar ao carrinho (atualiza Redux)
 
-Comprar agora → envia produto direto para checkout
+## Carrinho global persistente
 
-Carrinho global persistente.
+- Carrinho (/cart)
 
-3️⃣ Carrinho (/cart)
+- Exibe itens adicionados com nome, marca, quantidade, preço unitário e subtotal
 
-Exibe itens adicionados com nome, marca, quantidade, preço unitário e subtotal.
+- Funcionalidades:
 
-Funcionalidades:
+- Alterar quantidade (+ / -)
 
-Alterar quantidade (+ / -)
+- Remover produtos
 
-Remover produtos
+- Calcular subtotal e total dinamicamente
 
-Calcular subtotal e total dinamicamente
+- Botão “Concluir compra” redireciona para checkout
 
-Botão “Concluir compra” redireciona para checkout.
+- Feedback visual de vazio e atualizações
 
-Feedback visual de vazio e atualizações.
+## Checkout (/checkout)
 
-4️⃣ Checkout (/checkout)
+- Formulário de dados do comprador pré-preenchido com dados do usuário logado
 
-Formulário de dados do comprador (pré-preenchido com dados do usuário logado).
+## Seleção de método de pagamento:
 
-Seleção de método de pagamento:
+- Pix → campo de chave
 
-Pix → campo de chave
+- Cartão → número, validade, CVV
 
-Cartão → número, validade, CVV
+- Boleto → simula emissão de boleto
 
-Boleto → simula emissão do boleto
+- Resumo do pedido: produtos, quantidade, subtotal, frete e total
 
-Resumo do pedido:
+___________________________________________________________________________________________
 
-Produtos, quantidade, subtotal, frete, total.
+**Detalhes:**
 
-Simulação do status do pagamento:
+-> Simulação do status do pagamento: inicial → processando → pago / falhado / expirado
 
-Inicial → Processando → Pago / Falhou / Expirado
+-> Botão “Concluir Pagamento” dispara a simulação de forma mockada
 
-Latência simulada com setTimeout
+___________________________________________________________________________________________
 
-Feedback visual (loading, erro, sucesso)
+## Header
 
-Botão “Concluir Pagamento” dispara a simulação.
+- Avatar com popover de logout usando ShadCN UI
 
-5️⃣ Header
+- Exibe email do usuário logado
 
-Avatar com popover de logout via ShadCN UI.
+- Atualiza estado quando o usuário desloga
 
-Exibe email do usuário logado.
+## Funcionalidades Extras
 
-Atualiza estado quando o usuário desloga.
+- Carrinho global com Redux Toolkit
 
-🔹 Funcionalidades Extras
+- Login persistente usando LocalStorage
 
-Carrinho global com Redux Toolkit.
+- Proteção de rotas: checkout só acessível para usuários logados
 
-Login persistente usando localStorage.
+- Resumo de pedido dinâmico no checkout
 
-Proteção de rotas: checkout só acessível para usuários logados.
+- Simulação completa de status de pagamento com latência realista
 
-Resumo de pedido dinâmico no checkout.
+- Componentização e UI consistente com ShadCN UI
 
-Simulação completa de status de pagamento com transições realistas.
+- Responsividade básica e acessibilidade (foco, labels, navegação por teclado)
 
-Componentização e reutilização de UI consistente com ShadCN UI.
-
-Responsividade básica e acessibilidade (foco, labels, navegação por teclado).
-
-🔹 Fluxo Esperado (Resumo)
+## Fluxo Esperado
 
 Login / Cadastro → validação e persistência no navegador
 
@@ -166,4 +158,4 @@ Revisão e confirmação
 
 Simulação de pagamento com status inicial → processando → pago / falhado / expirado
 
-Resultado do Pagamento → tela final mostrando sucesso ou falha.
+Resultado do Pagamento → tela final mostrando sucesso ou falha, opção de tentar novamente
