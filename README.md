@@ -159,3 +159,17 @@ Revisão e confirmação
 Simulação de pagamento com status inicial → processando → pago / falhado / expirado
 
 Resultado do Pagamento → tela final mostrando sucesso ou falha, opção de tentar novamente
+
+
+## Rodando o Projeto
+
+Primerio, faça o clone do repositório.
+Então, para rodar o projeto localmente:
+
+npm install
+npm run dev
+
+
+Após iniciar, a aplicação pode ser acessada em http://localhost:3000
+.
+A aplicação começa na rota /login ou /catalog (ambas funcionam), mas o fluxo de checkout exige que o usuário esteja logado.
