@@ -1,3 +1,5 @@
+"use client"
+
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -15,11 +17,47 @@ import {
   FieldSeparator,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+import { useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
+
+const users = [
+  {
+    id: "1",
+    name: "Renato",
+    email: "renato@gmail.com",
+    password: "123",
+  },
+];
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+
+
+  const router = useRouter();
+  const [email, setEmail] = useState("renato@gmail.com");
+  const [password, setPassword] = useState("123");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    // Verifica se já está logado
+    const logged = localStorage.getItem("user");
+    if (logged) router.push("/catalog");
+  }, [router]);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    const found = users.find((u) => u.email === email && u.password === password);
+    if (!found) {
+      setError("E-mail ou senha inválidos");
+      return;
+    }
+    // Salva no localStorage
+    localStorage.setItem("user", JSON.stringify({ id: found.id, name: found.name, email: found.email }));
+    router.push("/catalog"); // redireciona
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -62,6 +100,8 @@ export function LoginForm({
                   type="email"
                   placeholder="m@example.com"
                   required
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Field>
               <Field>
@@ -74,10 +114,16 @@ export function LoginForm({
                     Esqueceu sua senha?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input
+                  id="password"
+                  type="password"
+                  required 
+                  value={password} 
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </Field>
               <Field>
-                <Button type="submit">Login</Button>
+                <Button type="submit" onClick={handleLogin}>Login</Button>
                 <FieldDescription className="text-center">
                   Não tem uma conta? <a href="#">Crie uma</a>
                 </FieldDescription>

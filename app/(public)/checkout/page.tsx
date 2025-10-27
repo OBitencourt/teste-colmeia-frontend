@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator"
 import { useAppSelector } from "@/store"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function CheckoutPage () {
     const router = useRouter()
@@ -19,6 +19,13 @@ export default function CheckoutPage () {
     const totalPrice = items.reduce((acc, item) => {
         return acc + item.product.price * item.quantity
     }, 0)
+    
+    useEffect(() => {
+        const user = localStorage.getItem("user");
+        if (!user) {
+        router.push("/login"); // se não estiver logado, redireciona
+        }
+    }, [router]);
 
     const handleConfirmPayment = () => {
         // SetTimeout para simular latência

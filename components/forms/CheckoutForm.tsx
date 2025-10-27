@@ -16,8 +16,6 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from "../ui/select"
-
 const CheckoutForm = ({
   className,
   ...props

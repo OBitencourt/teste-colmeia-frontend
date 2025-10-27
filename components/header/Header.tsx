@@ -7,20 +7,34 @@ import { Input } from "../ui/input"
 import { Sheet, SheetTrigger } from "../ui/sheet"
 import Cart from "../cart/Cart"
 import { useAppSelector } from "@/store"
+import Link from "next/link"
+import { useState, useEffect } from "react"
+import AvatarPopover from "./AvatarPopover"
 
 
 const Header = () => {
 
     const items = useAppSelector(store => store.cart.items)
+    const [userEmail, setUserEmail] = useState<string | null>(null);
+
+    useEffect(() => {
+        const user = localStorage.getItem("user");
+        if (user) {
+        const parsed = JSON.parse(user);
+        setUserEmail(parsed.email);
+        }
+    }, []);
 
     return (
         <header className="w-full bg-amber-400 h-20 flex justify-between items-center px-24">
-            <Image 
-                src="/hive-logo.svg"
-                width={50}
-                height={50}
-                alt="hive-logo"
-            />
+            <Link href="/catalog">
+                <Image 
+                    src="/hive-logo.svg"
+                    width={50}
+                    height={50}
+                    alt="hive-logo"
+                />
+            </Link>
             <div>
                 <Input
                     className="bg-zinc-100 w-[450px] border border-zinc-400 p-5"
@@ -31,12 +45,7 @@ const Header = () => {
             </div>
 
             <div className="flex gap-4 items-center">
-                <Avatar className="size-10 bg-zinc-50">
-                    <AvatarFallback>
-                        AB
-                    </AvatarFallback>
-                </Avatar>
-
+                <AvatarPopover />
                 <Sheet>
                     <SheetTrigger>
 

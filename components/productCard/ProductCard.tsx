@@ -1,4 +1,4 @@
-import { ShoppingCart } from "lucide-react"
+import { ShoppingCart, StarIcon } from "lucide-react"
 import Image from "next/image"
 import { Button } from "../ui/button"
 import { Badge } from "../ui/badge"
@@ -6,6 +6,8 @@ import Link from "next/link"
 import { useAppDispatch } from "@/store"
 import { addToCart } from "@/store/slices/cart"
 import { products } from "@/mocks/products";
+import { Sheet, SheetTrigger } from "../ui/sheet"
+import Cart from "../cart/Cart"
 
 interface ProductCardType {
     id: string
@@ -29,28 +31,32 @@ const ProductCard = ({id, name, price, image, brand, rating}: ProductCardType) =
 
     return (
         
-        <div className="flex  flex-wrap wrap-normal bg-amber-50 rounded-sm border-amber-100 border hover:scale-105 transition p-6">
+        <div className="flex  flex-wrap wrap-normal rounded-sm border-amber-100 border hover:scale-105 transition p-6">
             <div className="flex flex-col gap-3 ">
                 
-
-                <div className="bg-zinc-50 w-full h-50 rounded-2xl flex justify-center items-center">
-                    <Image 
-                        src={image}
-                        width={200}
-                        height={200}
-                        alt="product-1"
-                        style={{
-                            height: 'auto',
-                            maxWidth: '150px'
-                        }}
-                    />
-                </div>
+                <Link
+                    href={`/catalog/product/${id}`}
+                >
+                    <div className="bg-zinc-50 w-full h-50 rounded-2xl flex justify-center items-center">
+                        <Image 
+                            src={image}
+                            width={200}
+                            height={200}
+                            alt="product-1"
+                            style={{
+                                height: 'auto',
+                                maxWidth: '150px'
+                            }}
+                        />
+                    </div>
+                </Link>
 
                 <div className="flex justify-between">
                     <Badge>
                         {brand}
                     </Badge>
-                    <div>
+                    <div className="flex gap-1 text-amber-400 font-medium items-center">
+                        <StarIcon className="w-5 h-5" />
                         {rating}/5
                     </div>
                 </div>
@@ -64,19 +70,21 @@ const ProductCard = ({id, name, price, image, brand, rating}: ProductCardType) =
                         ${price}
                     </span>
                 </Link>
-                <div className="flex justify-between gap-1 w-full">
-                    
-                    <Button className="w-2/3 cursor-pointer" size="lg">
-                        Comprar Agora
-                    </Button>
-                    <Button
-                        size="lg"
-                        variant="outline"
-                        onClick={handleAddToCart}
-                    >
-                        <ShoppingCart />
-                    </Button>
-                </div>
+                <Sheet>
+                    <SheetTrigger>
+
+                        <Button
+                            size="lg"
+                            variant="outline"
+                            onClick={handleAddToCart}
+                            className="flex gap-2"
+                        >
+                            Adicionar ao Carrinho
+                            <ShoppingCart />
+                        </Button>
+                    </SheetTrigger>
+                    <Cart />
+                </Sheet>
             </div>
 
         </div>

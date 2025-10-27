@@ -8,6 +8,8 @@ import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { useAppDispatch } from "@/store";
 import { addToCart } from "@/store/slices/cart";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
+import Cart from "@/components/cart/Cart";
 
 export default function ProductPage () {
 
@@ -80,13 +82,21 @@ export default function ProductPage () {
 
                     <div className="flex flex-col w-full gap-6 absolute bottom-60">
                         <div className="flex gap-3">
+                            <Sheet>
+                                <SheetTrigger className="flex-5 w-full">
 
-                            <Button
-                                size="lg"
-                                className="text-lg p-8 flex-8"
-                            >
-                                Comprar Agora
-                            </Button>
+                                    <Button
+                                        size="lg"
+                                        variant="default"
+                                        className="flex w-full gap-4 text-lg p-8 flex-5"
+                                        onClick={handleAddToCart}
+                                    >
+                                        Adicionar ao carrinho
+                                        <ShoppingCart />
+                                    </Button>
+                                </SheetTrigger>
+                                <Cart />
+                            </Sheet>
                             <Button
                                 size="lg"
                                 className="p-8 flex-1"
@@ -95,15 +105,6 @@ export default function ProductPage () {
                                 <Heart  />
                             </Button>
                         </div>
-                        <Button
-                            size="lg"
-                            variant="outline"
-                            className="flex gap-4 text-lg p-8"
-                            onClick={handleAddToCart}
-                        >
-                            Adicionar ao carrinho
-                            <ShoppingCart />
-                        </Button>
                     </div>
                 </aside>
             </main>
