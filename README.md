@@ -166,9 +166,10 @@ Resultado do Pagamento → tela final mostrando sucesso ou falha, opção de ten
 Primerio, faça o clone do repositório.
 Então, para rodar o projeto localmente:
 
+```
 npm install
 npm run dev
-
+```
 
 Após iniciar, a aplicação pode ser acessada em http://localhost:3000
 .
